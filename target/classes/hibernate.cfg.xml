@@ -25,14 +25,15 @@
         </property>
 
         <property name="show_sql">
-            true
+            false
         </property>
 
         <property name="hbm2ddl.auto">
-            create
+            update
         </property>
 
-        <!-- <mapping class="pl.camp.it.model.Product"/> -->
+        <mapping class="pl.camp.it.model.Category"/>
+        <mapping class="pl.camp.it.model.Product"/>
 
     </session-factory>
 
