@@ -5,12 +5,11 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import pl.camp.it.App;
 import pl.camp.it.model.Product;
-
 import java.util.List;
 
-public class ProductDAO {
+public class ProductDAO implements IProductDAO {
 
-
+    @Override
     public void saveProductToDataBase(Product product) {
         Session session = App.sessionFactory.openSession();
         Transaction tx = null;
@@ -29,6 +28,7 @@ public class ProductDAO {
         }
     }
 
+    @Override
     public List<Product> getAllProductsFromDataBase() {
         Session session = App.sessionFactory.openSession();
         Query<Product> query = session.createQuery("FROM pl.camp.it.model.Product");
@@ -37,7 +37,8 @@ public class ProductDAO {
         return products;
     }
 
-    public  List<Product> getProductsByCategoryFromDataBase(int id) {
+    @Override
+    public List<Product> getProductsByCategoryFromDataBase(int id) {
         Session session = App.sessionFactory.openSession();
         Query<Product> query = session.createQuery("FROM pl.camp.it.model.Product WHERE category_id = :id");
         query.setParameter("id", id);

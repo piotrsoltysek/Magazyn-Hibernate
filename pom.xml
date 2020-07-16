@@ -30,6 +30,14 @@
             <version>8.0.19</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.14</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -72,6 +80,8 @@
                     <target>11</target>
                 </configuration>
             </plugin>
+
+
 
         </plugins>
     </build>

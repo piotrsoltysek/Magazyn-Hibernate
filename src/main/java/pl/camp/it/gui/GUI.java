@@ -4,14 +4,16 @@ import pl.camp.it.App;
 import pl.camp.it.dao.CategoryDAO;
 import pl.camp.it.model.Category;
 import pl.camp.it.services.CategoryService;
+import pl.camp.it.services.ICategoryService;
+import pl.camp.it.services.IProductService;
 import pl.camp.it.services.ProductService;
 
 import java.util.Scanner;
 
 public class GUI {
     private static Scanner scanner = new Scanner(System.in);
-    private static CategoryService categoryService = new CategoryService();
-    private static ProductService productService = new ProductService();
+    private static ICategoryService categoryService = new CategoryService();
+    private static IProductService productService = new ProductService();
 
     public static void showMainMenu() {
         System.out.println("------------------------");
@@ -21,7 +23,7 @@ public class GUI {
         System.out.println("4. Dodaj produkt");
         System.out.println("5. Dodaj kategorię");
         System.out.println("6. Usuń kategorię");
-        System.out.println("7. Exit");
+        System.out.println("7. Wyloguj");
         System.out.print("Podaj cyfrę: ");
 
         String choose = scanner.nextLine();
@@ -52,8 +54,7 @@ public class GUI {
                 showMainMenu();
                 break;
             case "7":
-                App.sessionFactory.close();
-                System.exit(0);
+                LoginGUI.showLoginMainMenu();
             default:
                 System.out.println("Nieprawidłowy wybór !!");
                 showMainMenu();
