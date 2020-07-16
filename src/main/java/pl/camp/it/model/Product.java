@@ -15,8 +15,7 @@ public class Product {
     private double price;
     @Column(nullable = false, unique = true)
     private long barcode;
-    @OneToOne//(cascade = CascadeType.ALL)
-    // TODO: 15.07.2020 W moim przypaku chyba nie korzystć z kaskadowości
+    @OneToOne(cascade = CascadeType.ALL)
     private Category category;
 
 

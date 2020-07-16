@@ -36,4 +36,8 @@ public class CategoryService {
     public boolean categoryExist(String category) {
         return categoryDAO.checkCategoryInDataBase(category);
     }
+
+    public boolean categoryExistWithDeleted(String category) {
+        return categoryDAO.checkCategoryInDataBaseWithDeleted(category);
+    }
 }

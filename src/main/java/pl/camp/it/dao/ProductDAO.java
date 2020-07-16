@@ -39,7 +39,7 @@ public class ProductDAO {
 
     public  List<Product> getProductsByCategoryFromDataBase(int id) {
         Session session = App.sessionFactory.openSession();
-        Query<Product> query = session.createQuery("FROM pl.camp.it.model.Product WHERE category_id = :id");// TODO: 15.07.2020 Sprawdzić, czy nie category_id
+        Query<Product> query = session.createQuery("FROM pl.camp.it.model.Product WHERE category_id = :id");
         query.setParameter("id", id);
         List<Product> products = query.getResultList();
         session.close();

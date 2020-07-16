@@ -28,13 +28,17 @@ public class CategoryDAO {
     }
 
     public boolean checkCategoryInDataBase(String category) {
-
         for (Category category2 : getAllCategoriesFromDataBase()) {
-
             if (category2.getName().equals(category)) {
-                if (category2.isDeleted() == true) {
-                    System.out.println("Kategoria została wcześniej usunięta");
-                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkCategoryInDataBaseWithDeleted(String category) {
+        for (Category category2 : getAllCategoriesFromDataBaseWithDeleted()) {
+            if (category2.getName().equals(category)) {
                 return true;
             }
         }
@@ -89,6 +93,14 @@ public class CategoryDAO {
     public List<Category> getAllCategoriesFromDataBase() {
         Session session = App.sessionFactory.openSession();
         Query<Category> query = session.createQuery("FROM pl.camp.it.model.Category WHERE deleted = false");
+        List<Category> categories = query.getResultList();
+        session.close();
+        return categories;
+    }
+
+    public List<Category> getAllCategoriesFromDataBaseWithDeleted() {
+        Session session = App.sessionFactory.openSession();
+        Query<Category> query = session.createQuery("FROM pl.camp.it.model.Category");
         List<Category> categories = query.getResultList();
         session.close();
         return categories;

@@ -69,7 +69,6 @@ public class GUI {
             System.out.println(productService.getProductsByCategory(category2));
         } else {
             System.out.println("Nie ma takiej kategorii");
-            showProductsFromCategoryScreen();
         }
     }
 
@@ -89,21 +88,26 @@ public class GUI {
         if (categoryService.categoryExist(category)) {
             Category category2 = categoryService.getCategoryByName(category);
             productService.saveProduct(name, amount, price, barcode, category2);
+            System.out.println("Produkt dodany do istniejącej kategorii");
+        } else if (categoryService.categoryExistWithDeleted(category)) {
+            System.out.println("Taka kategoria była już wcześniej usunięta, nie można dodać ponownie");
         } else {
-            System.out.println("Nie ma takiej kategorii, produkt dodany do kategorii: Brak kategorii");
-            Category category3 = categoryService.getCategoryByName("Brak kategorii");
-            productService.saveProduct(name, amount, price, barcode, category3);
+            productService.saveProductWithNewCategory(name, amount, price, barcode, category);
+            System.out.println("Produkt dodany, utworzono nową kategorię");
+            }
         }
 
-    }
 
     public static void showAddCategoryScreen() {
         System.out.println("Podaj nazwę kategorii:");
         String name = scanner.nextLine();
         if (categoryService.categoryExist(name)) {
             System.out.println("Podana kategoria już istnieje");
+        } else if (categoryService.categoryExistWithDeleted(name)) {
+            System.out.println("Podana kategoria była już wcześniej dodana i została usunięta. Nie można dodać ponownie");
         } else {
             categoryService.saveCategory(name);
+            System.out.println("Dodano kategorię");
         }
     }
 
@@ -113,17 +117,16 @@ public class GUI {
         String category = scanner.nextLine();
         if (category.equals("Brak kategorii")) {
             System.out.println("Nie można usunąć tej kategorii");
-            showDeleteProductScreen();
+            return;
         }
-
         if (categoryService.categoryExist(category)) {
             Category category2 = categoryService.getCategoryByName(category);
             Category brakKategorii = categoryService.getCategoryByName("Brak kategorii");
             productService.updateProductCategoryToBrakKategorii(productService.getProductsByCategory(category2), brakKategorii);
             categoryService.deleteCategory(category2);
+            System.out.println("Kategoria usunięta, produkty przerzucone do: Brak kategorii");
         } else {
             System.out.println("Nie ma takiej kategorii");
-
         }
     }
 }

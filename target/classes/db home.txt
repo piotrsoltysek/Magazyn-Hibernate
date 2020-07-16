@@ -1,6 +1,0 @@
-18942511_magazyn_hibernate
-
-login: 18942511_magazyn_hibernate
-pass: piotrek123
-
-GIT: https://github.com/piotrsoltysek/Magazyn-Hibernate.git

@@ -21,6 +21,21 @@ public class ProductService {
         productDAO.saveProductToDataBase(product);
     }
 
+    public void saveProductWithNewCategory(String name, int amount, double price, long barcode, String category) {
+        Product product = new Product();
+        product.setName(name);
+        product.setAmount(amount);
+        product.setPrice(price);
+        product.setBarcode(barcode);
+
+        Category category1 = new Category();
+        category1.setName(category);
+        category1.setDeleted(false);
+        product.setCategory(category1);
+
+        productDAO.saveProductToDataBase(product);
+    }
+
     public List<Product> getAllProducts() {
         return productDAO.getAllProductsFromDataBase();
     }
